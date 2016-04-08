@@ -8,7 +8,8 @@ This tutorial walks through the steps for creating data in Apache Hive through A
 
 ## Prerequisites
 
-Atlas-Ranger preview VM. You can download it from [here](https://s3.amazonaws.com/demo-drops.hortonworks.com/HDP-Atlas-Ranger-TP.ova)
+Atlas-Ranger preview VM. You can download it from [here](https://s3.amazonaws.com/demo-drops.hortonworks.com/HDP-Atlas-Ranger-TP.ova)  
+
 Ensure that VM is fully booted up, all services are up and running. Reference screenshot is below
 ![](https://github.com/hortonworks/tutorials/blob/atlas-ranger-tp/assets/cross-component-lineage-with-atlas/5-atlas-ranger-vm-bootup.png)
 
