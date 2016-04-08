@@ -26,65 +26,63 @@ SSH into your VM. The password to login is 'hadoop'
 
 *Note: It is recommend to change the default root password once you have installed the VM in your environment*
 
-Run the below command in your terminal
+Run the below command in your terminal   
 `cat 001-setup-mysql.sql | mysql -u root -p`
 
-#
-# Run the SQOOP Job
-# ** default password is blank
-#
-sh 002-run-sqoop-import.sh
 
-#
-# Create CTAS sql command
-#
-cat 003-ctas-hive.sql | beeline -u "jdbc:hive2://localhost:10000/default" -n hive -p hive -d org.apache.hive.jdbc.HiveDriver
+#### Step 2 Run the SQOOP Job
+*Note: ** default password is blank *
+
+Run the below command in your terminal  
+`sh 002-run-sqoop-import.sh`
 
 
+#### Step 3 Create CTAS sql command
 
+Run the below command in your terminal
+`cat 003-ctas-hive.sql | beeline -u "jdbc:hive2://localhost:10000/default" -n hive -p hive -d org.apache.hive.jdbc.HiveDriver'
 
+![](https://github.com/hortonworks/tutorials/blob/atlas-ranger-tp/assets/cross-component-lineage-with-atlas/1-sqoop-lineage.png)
 
-
+![](https://github.com/hortonworks/tutorials/blob/atlas-ranger-tp/assets/cross-component-lineage-with-atlas/2-hive-table-details.png)
 
 
 STORM - based lineage 
 
-#
-#
-#  This demo will show the lineage of data between Kafka TOPIC (mytopic@erietp) to STORM topology (erie_demo_topology),
-#  which stores the output in the HDFS folder (/user/storm/storm-hdfs-test)
-#
 
-#
+This demo will show the lineage of data between Kafka TOPIC (mytopic@erietp) to STORM topology (erie_demo_topology),
+which stores the output in the HDFS folder (/user/storm/storm-hdfs-test)
+
+
+
 # Create a Kafka topic to be used in the demo
-#
+
 001-create_topic.sh
 
-#
+
 # Create a HDFS folder for output
-#
+
 002-create-hdfs-outdir.sh
 
-#
-# Download STORM job jar file - Source is available at https://github.com/yhemanth/storm-samples 
-#
+
+ Download STORM job jar file - Source is available at https://github.com/yhemanth/storm-samples 
+
 003-download-storm-sample.sh
 
-#
+
 # Run the Storm JOB 
-#
+
 
 004-run-storm-job.sh
 
-#
-# View ATLAS UI for the lineage
-#
-#  http://localhost:21000/
-#
-#  Search for: kafka_topic
-#  Click on: my-topic@erietp
-#
-#
+
+ View ATLAS UI for the lineage
+
+http://localhost:21000/
+
+Search for: kafka_topic
+Click on: my-topic@erietp
+
 
 
 
