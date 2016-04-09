@@ -1,3 +1,14 @@
+---
+layout: tutorial
+title: How to Refine and Visualize Social Media Sentiment Data
+tutorial-id: 610
+tutorial-series: Atlas-Ranger Tech Preview
+tutorial-version: hdp-2.4.0
+intro-page: false
+components: [ atlas, sqoop, storm, hive, ranger ]
+---
+
+
 # Cross Component Lineage with Apache Atlas, across Apache Sqoop, Storm and Hive
 
 ## Introduction
@@ -11,7 +22,8 @@ This tutorial walks through the steps for creating data in Apache Hive through A
 Atlas-Ranger preview VM. You can download it from [here](https://s3.amazonaws.com/demo-drops.hortonworks.com/HDP-Atlas-Ranger-TP.ova)  
 
 Ensure that VM is fully booted up, all services are up and running. Reference screenshot is below
-![](https://github.com/hortonworks/tutorials/blob/atlas-ranger-tp/assets/cross-component-lineage-with-atlas/5-atlas-ranger-vm-bootup.png)
+
+![](/assets/cross-component-lineage-with-atlas/5-atlas-ranger-vm-bootup.png)
 
 ## Steps
 
@@ -50,8 +62,10 @@ sh 002-run-sqoop-import.sh
 *Note: default password for mysql root user is blank. Press enter when prompted for password*
 
 Here is the screenshot of results you would see in the screen when you run the above script. 
-![](https://github.com/hortonworks/tutorials/blob/atlas-ranger-tp/assets/cross-component-lineage-with-atlas/7-sqoop-import-start.png)
-![](https://github.com/hortonworks/tutorials/blob/atlas-ranger-tp/assets/cross-component-lineage-with-atlas/8-sqoop-import-finish.png)
+
+![](/assets/cross-component-lineage-with-atlas/7-sqoop-import-start.png)
+
+![](/assets/cross-component-lineage-with-atlas/8-sqoop-import-finish.png)
 
 #### Step 4- Create CTAS sql command
 
@@ -61,15 +75,17 @@ Run the below command in your terminal
 ```
 cat 003-ctas-hive.sql | beeline -u "jdbc:hive2://localhost:10000/default" -n hive -p hive -d org.apache.hive.jdbc.HiveDriver
 ```
-![](https://github.com/hortonworks/tutorials/blob/atlas-ranger-tp/assets/cross-component-lineage-with-atlas/10-ctas-start.png)
+![](/assets/cross-component-lineage-with-atlas/10-ctas-start.png)
 
 
 #### Step 4 -View ATLAS UI for the lineage
 
 Click on http://127.0.0.1:21000
 Search for *hive_table*, click on *default.cur_hive_table@erietp*
-![](https://github.com/hortonworks/tutorials/blob/atlas-ranger-tp/assets/cross-component-lineage-with-atlas/9-atlas-hive-search.png)
-![](https://github.com/hortonworks/tutorials/blob/atlas-ranger-tp/assets/cross-component-lineage-with-atlas/1-sqoop-lineage.png)
+
+![](/assets/cross-component-lineage-with-atlas/9-atlas-hive-search.png)
+
+![](/assets/cross-component-lineage-with-atlas/1-sqoop-lineage.png)
 
 
 ## STORM - based lineage 
@@ -127,8 +143,10 @@ Run the following command
 ```
 sh 004-run-storm-job.sh
 ```
-![](https://github.com/hortonworks/tutorials/blob/atlas-ranger-tp/assets/cross-component-lineage-with-atlas/11-storm-job-start.png)
-![](https://github.com/hortonworks/tutorials/blob/atlas-ranger-tp/assets/cross-component-lineage-with-atlas/12-storm-job-end.png)
+
+![](/assets/cross-component-lineage-with-atlas/11-storm-job-start.png)
+
+![](/assets/cross-component-lineage-with-atlas/12-storm-job-end.png)
 
 #### Step 5 -View ATLAS UI for the lineage
 
@@ -137,8 +155,9 @@ Go to the Atlas UI http://localhost:21000/
 Search for: kafka_topic
 Click on: my-topic-01@erietp
 
-![](https://github.com/hortonworks/tutorials/blob/atlas-ranger-tp/assets/cross-component-lineage-with-atlas/3-atlas-kafka-topic.png)
-![](https://github.com/hortonworks/tutorials/blob/atlas-ranger-tp/assets/cross-component-lineage-with-atlas/4-kafka-lineage.png)
+![](/assets/cross-component-lineage-with-atlas/3-atlas-kafka-topic.png)
+
+![](/assets/cross-component-lineage-with-atlas/4-kafka-lineage.png)
 
 ## Summary
 
