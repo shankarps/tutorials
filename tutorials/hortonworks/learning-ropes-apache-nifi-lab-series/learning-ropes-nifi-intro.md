@@ -4,7 +4,7 @@ Version 1 for HDP 2.4 updated June 13, 2016
 
 ## Introduction
 
-Capturing live data is one of the principal challenges facing any organization.  Hortonworks DataFow(HDF) provides an easy to use, graphical, way of handling incoming information.  In addition to its usability, HDF has integrated security(ssl & encryption), scalability(true clustering), and extensible(open source) due to its modular open source architecture.  Businesses have been leveraging this to integrate everything from firewall logs, to manufacturing data, to even real time traffic information.
+Capturing live data is one of the principal challenges facing any organization.  Hortonworks DataFlow(HDF) provides an easy to use, graphical, way of handling incoming information.  In addition to its usability, HDF has integrated security(ssl & encryption), scalability(true clustering), and extensible(open source) due to its modular open source architecture.  Businesses have been leveraging this to integrate everything from firewall logs, to manufacturing data, to even real time traffic information.
 
 A city planning board is evaluating the need for a new highway.  This decision is highly dependant on current traffic patterns, particularly as other roadwork initiatives are under way.  Integrating live data poses a problem because traffic Analysis has traditionally been done using historical aggregated traffic counts.  In order to improve the traffic analysis, the city planner wants to also leverage real time data to get a deeper understanding of traffic patterns.  In order to ensure ongoing flexibility, HDF was selected for its many integration points and low barrier to entry.
 
