@@ -1,6 +1,6 @@
 ---
 layout: tutorial
-title: Ingesting and Processing Realtime Events with Apache Storm
+title: Real Time Data Ingestion in Hbase and Hive using Storm
 tutorial-id: 220
 tutorial-series: Streaming
 tutorial-version: hdp-2.4.0
