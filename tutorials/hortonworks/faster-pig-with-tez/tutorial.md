@@ -48,7 +48,7 @@ We are going to read in a baseball statistics file. We are going to compute the 
 
 ### Step 1: Download the data <a id="download-the-data"></a>
 
-Download the data file from [lahman591-csv.zip](http://www.seanlahman.com). After the file is downloaded, extract it.
+Download the data file from [lahman591-csv.zip](http://seanlahman.com/files/database/lahman591-csv.zip). After the file is downloaded, extract it.
 
 ### Step 2: Upload Data into HDFS <a id="upload-data-into-hdfs"></a>
 

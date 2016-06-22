@@ -1,3 +1,13 @@
+---
+layout: tutorial
+title: Ingest, Route and Land Real Time Events with Apache NiFi
+tutorial-id: 220
+tutorial-series: Streaming
+tutorial-version: hdp-2.4.0
+intro-page: false
+components: [ nifi ]
+---
+
 # Lab0: Ingest, Route and Land Real Time Events with Apache NiFi
 
 ## Introduction

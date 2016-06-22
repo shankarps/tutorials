@@ -22,11 +22,11 @@ Before you run a notebook to access Spark and Hive, you need to create and confi
 
     *  In the first list of properties, specify the following values (if they are not already set). To add a property, enter the name and value into the form at the end of the list, and click **+**.
 
-        ~~~
+        <pre>
         master           yarn-client
         spark.home       /usr/hdp/current/spark-client
         spark.yarn.jar   /usr/hdp/current/spark-client/lib/spark-assembly-1.6.0.2.4.0.0-169-hadoop2.7.1.2.4.0.0-169.jar
-        ~~~
+        </pre>
 
     *  Add the following properties and settings (HDP version may vary; specify the appropriate version for your cluster):
 

@@ -1,6 +1,3 @@
-<<<<<<< HEAD:tutorials/hortonworks/realtime-event-processing-with-hdf/rtep-concepts.md
-## Introduction
-=======
 ---
 layout: tutorial
 title: Real Time Data Processing in Hadoop
@@ -8,11 +5,10 @@ tutorial-id:
 tutorial-series: Streaming
 tutorial-version: hdp-2.4.0
 intro-page: true
-components: [ storm, kafka ]
+components: [ storm, kafka, nifi ]
 ---
 
 ### Introduction
->>>>>>> hortonworks/hdp:tutorials/hortonworks/realtime-event-processing-with-hadoop/rtep-concepts.md
 
 In this tutorial, you will strengthen your foundation of technologies used in real-time event processing. You will learn in detail how Apache Kafka sends messages, the process Apache Storm undergoes to collect that data and the process involved for HBase to read that streaming data.
 
@@ -21,17 +17,41 @@ In this tutorial, you will strengthen your foundation of technologies used in re
 - [Learning the Ropes of the Hortonworks Sandbox](http://hortonworks.com/hadoop-tutorial/learning-the-ropes-of-the-hortonworks-sandbox/)
 
 ## Outline
-- [1st Concept: Apache kafka](#concepts-apache-kafka)
-- [2nd Concept: Apache Storm](#concepts-apache-storm)
-- [3rd Concept: Kafka on Storm](#concepts-kafka-on-storm)
+- [1st Concept: Apache NiFi](#concepts-apache-nifi)
+- [2nd Concept: Apache Kafka](#concepts-apache-kafka)
+- [3rd Concept: Apache Storm](#concepts-apache-storm)
+- [5th Concept: Kafka on Storm](#concepts-kafka-on-storm)
 - [Further Reading](#further-reading-concepts)
 
-
-## 1st Concept: Apache kafka <a id="concepts-apache-kafka"></a>
+## 1st Concept: Apache NiFi <a id="concepts-apache-nifi"></a>
 
 ## Introduction:
 
-In a modern data architecture built on YARN-enabled Apache Hadoop, Kafka works in combination with Apache Storm, Apache HBase and Apache Spark for real-time  distributed messaging of streaming data. Kafka is an excellent low latency messaging platform for real-time streaming data sources, such as the internet of things, sensors, and transactional systems.  Whatever the industry or use case, Kafka brokers massive message streams for low-latency analysis in Enterprise Apache Hadoop.
+NiFi works with Apache Kafka, Apache Storm, Apache HBase and Spark for real-time distributed messaging of streaming data. NiFi is an excellent platform for ingesting real-time streaming data sources, such as the internet of things, sensors and transactional systems. If the data that comes in is garbage data, NiFi offers tools to filter out the undesired data. Additionally, NiFi can also act as a messenger and send data to the desired location.
+
+## Goals of this module:
+
+- Understand how Apache NiFi works
+
+## How NiFi Works
+
+NiFi’s system design can be thought of as an Automated Teller Machine, where incoming data is securely processed and written sequentially to disk. There are four main components involved in moving data in and out of NiFi:
+
+- FlowFile
+- Processor
+- Connections
+- Flow Controller
+
+![Image of NiFi Flow](/assets/realtime-event-processing-with-hdf/concepts/image_of_nifi_flow.png)
+
+In NiFi, a **FlowFile** is data brought into the flow from any data source and moves through the dataflow. **Connections** are linkages between components that enable FlowFiles to move throughout the dataflow. A **Flow Controller** regulates the exchange of FlowFiles between processors. **Processors** are actions taken on the FlowFiles to process their content and attributes to ensure desired data moves throughout the dataflow to eventually be stored at a secure location. Therefore, NiFi acts as a Producer to publish messages to one or more topics. So, at a high level, producers send messages over the network to the Kafka cluster.
+
+
+## 2nd Concept: Apache kafka <a id="concepts-apache-kafka"></a>
+
+## Introduction:
+
+In a modern data architecture built on YARN-enabled Apache Hadoop, Kafka works in combination with Apache Storm, Apache HBase and Apache Spark for real-time distributed messaging of streaming data. Kafka is an excellent low latency messaging platform for real-time streaming data sources, such as the internet of things, sensors, and transactional systems.  Whatever the industry or use case, Kafka brokers massive message streams for low-latency analysis in Enterprise Apache Hadoop.
 Kafka is fully supported and included in HDP today.
 
 ## Goals of this module:
@@ -65,16 +85,16 @@ Kafka’s system design can be thought of as that of a distributed commit log, w
 - Consumers
 - Brokers
 
-![Image of Kafka Flow](/assets/realtime-event-processing/concepts/01_kafka_cluster.png)
+![Image of Kafka Flow](/assets/realtime-event-processing-with-hdf/concepts/01_kafka_cluster.png)
 
-In Kafka, a **Topic** is a user-defined category to which messages are published. Kafka Producers publish messages to one or more topics and **Consumers** subscribe to topics and process the published messages. So, at a high level, producers send messages over the network to the Kafka cluster, which in turn serves them up to consumers. Finally, a Kafka cluster consists of one or more servers, called **Brokers** that manage the persistence and replication of message data (i.e. the commit log).
+In Kafka, a **Topic** is a user-defined category to which messages are published. NiFi will act in the role of Producers to publish messages to one or more topics and **Consumers** subscribe to topics and process the published messages. At a high level, producers send messages over the network to the Kafka cluster, which in turn serves them up to consumers. Finally, a Kafka cluster consists of one or more servers, called **Brokers** that manage the persistence and replication of message data (i.e. the commit log).
 
-![Image of Kafka Partitions](/assets/realtime-event-processing/concepts/02_kafka_partitions.png)
+![Image of Kafka Partitions](/assets/realtime-event-processing-with-hdf/concepts/02_kafka_partitions.png)
 
 One of the keys to Kafka’s high performance is the simplicity of the brokers’ responsibilities. In Kafka, topics consist of one or more Partitions that are ordered, immutable sequences of messages. Since writes to a partition are sequential, this design greatly reduces the number of hard disk seeks (with their resulting latency).
 Another factor contributing to Kafka’s performance and scalability is the fact that Kafka brokers are not responsible for keeping track of what messages have been consumed – that responsibility falls on the consumer. In traditional messaging systems, such as JMS, the broker bore this responsibility, severely limiting the system’s ability to scale as the number of consumers increased.
 
-![Image of Brokers w/ Zookeeper](/assets/realtime-event-processing/concepts/03_kafka_zookeeper.png)
+![Image of Brokers w/ Zookeeper](/assets/realtime-event-processing-with-hdf/concepts/03_kafka_zookeeper.png)
 
 For Kafka consumers, keeping track of which messages have been consumed (processed) is simply a matter of keeping track of an **Offset**, which is a sequential id number that uniquely identifies a message within a partition. Because Kafka retains all messages on disk (for a configurable amount of time), consumers can rewind or skip to any point in a partition simply by supplying an offset value. Finally, this design eliminates the potential for back-pressure when consumers process messages at different rates.
 
@@ -90,8 +110,6 @@ At the core of Storm’s data stream processing is a computational topology, whi
 ## Storm on Apache Hadoop YARN
 
 Storm on YARN is powerful for scenarios requiring  continuous analytics, real-time predictions, and continuous monitoring of operations. Eliminating a need to have dedicated silos, enterprises using Storm on YARN benefit on cost savings (by accessing the same datasets as other engines and applications on the same cluster) and on security, data governance, and operations (by employing the same compute resources managed by YARN.
-
-~~~[show an image how Storm integrates with YARN, the pluggable markitecture YARN as Data OS slide :)]~~~
 
 
 ## Storm in the Enterprise
@@ -135,7 +153,7 @@ A storm cluster has three sets of nodes:
 - **ZooKeeper** nodes – coordinates the Storm cluster
 - **Supervisor** nodes – communicates with Nimbus through Zookeeper, starts and stops workers according to signals from Nimbus
 
-![Image of Storm-Zookeeper](/assets/realtime-event-processing/concepts/04_storm_layout.png)
+![Image of Storm-Zookeeper](/assets/realtime-event-processing-with-hdf/concepts/04_storm_layout.png)
 
 Five key abstractions help to understand how Storm processes data:
 
@@ -145,7 +163,7 @@ Five key abstractions help to understand how Storm processes data:
 - **Bolts** – process input streams and produce output streams. They can run functions, filter, aggregate, or join data, or talk to databases.
 - **Topologies** – the overall calculation, represented visually as a network of spouts and bolts (as in the following diagram)
 
-![Img of Spouts and Bolts](/assets/realtime-event-processing/concepts/05_spouts_and_bolts.png)
+![Img of Spouts and Bolts](/assets/realtime-event-processing-with-hdf/concepts/05_spouts_and_bolts.png)
 
 Storm users define topologies for how to process the data when it comes streaming in from the spout. When the data comes in, it is processed and the results are passed onto to other bolts or stored in Hadoop.
 
@@ -173,7 +191,7 @@ A bolt consumes any number of input streams, does some processing, and possibly 
 
 Networks of spouts and bolts are packaged into a "topology," which is the top-level abstraction that you submit to Storm clusters for execution. A topology is a graph of stream transformations where each node is a spout or bolt. Edges in the graph indicate which bolts are subscribing to which streams. When a spout or bolt emits a tuple to a stream, it sends the tuple to every bolt that subscribed to that stream.
 
-![Another Img of spouts and bolts](/assets/realtime-event-processing/concepts/06_more_spouts_and_bolts.png)
+![Another Img of spouts and bolts](/assets/realtime-event-processing-with-hdf/concepts/06_more_spouts_and_bolts.png)
 
 Links between nodes in your topology indicate how tuples should be passed around. For example, if there is a link between Spout A and Bolt B, a link from Spout A to Bolt C, and a link from Bolt B to Bolt C, then every time Spout A emits a tuple, it will send the tuple to both Bolt B and Bolt C. All of Bolt B's output tuples will go to Bolt C as well.
 
@@ -201,11 +219,11 @@ An oil refinery takes crude oil, distills it, processes it and refines it into u
 Apache Storm is a distributed real-time computation engine that reliably processes unbounded streams of data. While Storm processes stream data at scale, Apache Kafka processes messages at scale. Kafka is a distributed pub-sub real-time messaging system that provides strong durability and fault tolerance guarantees.
 Storm and Kafka naturally complement each other, and their powerful cooperation enables real-time streaming analytics for fast-moving big data. HDP 2.4 contains the results of Hortonworks’ continuing focus on making the Storm-Kafka union even more powerful for stream processing.
 
-![Img of Cluster Layout](/assets/realtime-event-processing/concepts/07_hadoop_cluster.png)
+![Img of Cluster Layout](/assets/realtime-event-processing-with-hdf/concepts/07_hadoop_cluster.png)
 
 Conceptual Reference Architecture for Real-Time Processing in HDP 2.2
 
-![Image of Event Processing Pipeline](/assets/realtime-event-processing/concepts/08_event_processing_pipeline.png)
+![Image of Event Processing Pipeline](/assets/realtime-event-processing-with-hdf/concepts/08_event_processing_pipeline.png)
 
 Conceptual Introduction to the Event Processing Pipeline
 
@@ -227,7 +245,7 @@ Here are some typical uses for this event processing pipeline:
 
 To perform real-time computation on Storm, we create “topologies.” A topology is a graph of a computation, containing a network of nodes called “Spouts” and “Bolts.” In a Storm topology, a Spout is the source of data streams and a Bolt holds the business logic for analyzing and processing those streams.
 
-![Storm and Kafka Pipelines](/assets/realtime-event-processing/concepts/09_storm_topologies.png)
+![Storm and Kafka Pipelines](/assets/realtime-event-processing-with-hdf/concepts/09_storm_topologies.png)
 
 Hortonworks’ focus for Apache Storm and Kafka has been to make it easier for developers to ingest and publish data streams from Storm topologies. The first topology ingests raw data streams from Kafka and fans out to HDFS, which serves as persistent store for raw events. Next, a filter Bolt emits the enriched event to a downstream Kafka Bolt that publishes it to a Kafka Topic. As events flow through these stages, the system can keep track of data lineage that allows drill-down from aggregated events to its constituents and can be used for forensic analysis. In a multi-stage pipeline architecture, providing right cluster resources to most intense part of the data processing stages is very critical, an “Isolation Scheduler” in Storm provides the ability to easily and safely share a cluster among many topologies.
 In summary, refinery style data processing architecture enables you to:
@@ -237,6 +255,7 @@ In summary, refinery style data processing architecture enables you to:
 - Modularize your key cluster resources to most intense processing phase of the pipeline
 
 ## Further Reading <a id="further-reading-concepts"></a>
+- [Apache NiFi](https://nifi.apache.org/docs/nifi-docs/)
 - [Apache Storm](http://storm.apache.org/)
 - [Apache Kafka](http://kafka.apache.org/)
 - [Storm Kafka Integration](http://storm.apache.org/documentation/storm-kafka.html)

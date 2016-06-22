@@ -1,3 +1,14 @@
+---
+layout: tutorial
+title: Capture Real Time Event Stream with Apache Kafka
+tutorial-id: 220
+tutorial-series: Streaming
+tutorial-version: hdp-2.4.0
+intro-page: false
+components: [ kafka, nifi ]
+---
+
+
 # Lab 1: Capture Real Time Event Stream with Apache Kafka
 
 ## Introduction
