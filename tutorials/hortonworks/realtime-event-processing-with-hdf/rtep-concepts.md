@@ -1,7 +1,7 @@
 ---
 layout: tutorial
 title: Real Time Data Processing in Hadoop
-tutorial-id:
+tutorial-id: 220
 tutorial-series: Streaming
 tutorial-version: hdp-2.4.0
 intro-page: true
