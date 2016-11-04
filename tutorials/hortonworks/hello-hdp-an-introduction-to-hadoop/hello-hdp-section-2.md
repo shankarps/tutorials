@@ -120,7 +120,7 @@ A single physical machine gets saturated with its storage capacity as data grows
 ### 2.2 Goals of this module
 
 *   Understanding HDFS architecture
-*   Understanding Hortonworks Sandbox Amabri File User View
+*   Understanding Hortonworks Sandbox Ambari File User View
 
 ### 2.3 Hadoop Distributed File System
 
